@@ -5,12 +5,6 @@ class Services{
         this.serviceFee=fee;
         this.serviceName=name;
     }
-    public String getserviceName(){
-        return this.serviceName;
-    }
-    public float getserviceFee(){
-        return this.serviceFee;
-    }
 }
 class PhoneServices extends Services{
     private int freeMinutes;
@@ -26,7 +20,7 @@ class PhoneServices extends Services{
     }
 }
 class DataServices extends Services{
-    private final float discount=(float)0.3;
+    private final float discount=(float)0.3; //Ypothetoume ekptwsh pou dinetai sthn ekfwnhsh
     private int freeData;
     private float dataCost;
     public DataServices(String name,float fee,int freeData,float dataCost){
