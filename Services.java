@@ -1,4 +1,4 @@
-class Services{
+class Services{ //yphresia
     private String serviceName; //onoma yphresias
     private float serviceFee; //pagio yphresias
     public Services(String name,float fee){
@@ -6,7 +6,7 @@ class Services{
         this.serviceName=name;
     }
 }
-class PhoneServices extends Services{
+class PhoneServices extends Services{ //yphresia kinhths thlefwnias 
     private int freeMinutes; //dwrean lepta
     private int freeSMS; //dwrean sms
     private float minutesCost; //kostos leptwn meta apo dwrean
@@ -19,7 +19,7 @@ class PhoneServices extends Services{
         this.smsCost=smsCost;
     }
 }
-class DataServices extends Services{
+class DataServices extends Services{ //yphresia kinhtoy internet
     private final float discount=(float)0.3; //Ypothetoume ekptwsh pou dinetai sthn ekfwnhsh
     private int freeData; //dwrean dedomena
     private float dataCost; //kostos dedomenwn meta apo dwrean
@@ -29,10 +29,17 @@ class DataServices extends Services{
         this.freeData=freeData;
     }
 }
-class Card extends PhoneServices{
+class CardContract extends PhoneServices{ //programma kartosymvolaioy
     float budget; //arxiko mhniaio upoloipo gia ta kartosumvolaia
-    public Card(String name,float fee,int mins,int sms,float minCost,float smsCost,float startingBudget){
+    private final float discount=(float)0.25; //Ypothetoume ekptwsh pou dinetai sthn ekfwnhsh
+    public CardContract(String name,float fee,int mins,int sms,float minCost,float smsCost,float startingBudget){
         super(name,fee,mins,sms,minCost,smsCost);
         this.budget=startingBudget;
+    }
+}
+class nonCardContract extends PhoneServices{ //Programma symvolaioy
+    private final float discount=(float)0.2; //Ypothetoume ekptwsh pou dinetai sthn ekfwnhsh
+    public nonCardContract(String name,float fee,int mins,int sms,float minCost,float smsCost){
+        super(name,fee,mins,sms,minCost,smsCost);
     }
 }
