@@ -1,16 +1,16 @@
-import java.sql.Date;
+import java.util.Date;
 class Contracts {
-    int id; //kwdikos sumbolaioy
-    String serviceName; //onoma yphresias
-    String clientName; //onoma pelath
-    int clientNumber; //arithmos thlefwnou pelath
-    Date activationDate; //hmerominia energopoihshs
-    String paymentMethod; //tropos plhrwmhs
-    int minutestoBase; //lepta omilias pros stathera
-    int minutesToCell; //lepta omilias pros kinhta
-    int sms; //arithmos sms
-    int data; //ogkos dedomenwn
-    public Contracts(int id,String serviceName,String clientName,int clientNumber,Date activationDate,String paymentMethod,int minutesToCell,int minutestoBase,int sms){
+    private static int id=0; //kwdikos sumbolaioy
+    private Services serviceName; //yphresia
+    private String clientName; //onoma pelath
+    private String clientNumber; //arithmos thlefwnou pelath
+    private Date activationDate; //hmerominia energopoihshs
+    private String paymentMethod; //tropos plhrwmhs
+    private int minutestoBase; //lepta omilias pros stathera
+    private int minutesToCell; //lepta omilias pros kinhta
+    private int sms; //arithmos sms
+    private int data; //ogkos dedomenwn
+    public Contracts(Services serviceName,String clientName,String clientNumber,Date activationDate,String paymentMethod,int minutesToCell,int minutestoBase,int sms){
         this.id=id;
         this.serviceName=serviceName;
         this.clientName=clientName;
@@ -20,8 +20,9 @@ class Contracts {
         this.minutesToCell=minutesToCell;
         this.minutestoBase=minutestoBase;
         this.sms=sms;
+        id+=1;
     }
-    public Contracts(int id,String serviceName,String clientName,int clientNumber,Date activationDate,String paymentMethod,int minutesToCell,int data){
+    public Contracts(Services serviceName,String clientName,String clientNumber,Date activationDate,String paymentMethod,int data){
         this.id=id;
         this.serviceName=serviceName;
         this.clientName=clientName;
@@ -29,5 +30,6 @@ class Contracts {
         this.activationDate=activationDate;
         this.paymentMethod=paymentMethod;
         this.data=data;
+        id+=1;
     }
 }
