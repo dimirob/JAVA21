@@ -12,4 +12,10 @@ class Collections {
     void addToCollection(Contracts cont){
         this.contractArray.add(cont);
     }
+    Services getFromServices(int i){
+        return this.serviceArray.get(i);
+    }
+    Contracts getFromContracts(int i){
+        return this.contractArray.get(i);
+    }
 }
