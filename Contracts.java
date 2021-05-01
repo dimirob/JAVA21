@@ -10,7 +10,8 @@ class Contracts {
     private int minutesToCell; //lepta omilias pros kinhta
     private int sms; //arithmos sms
     private int data; //ogkos dedomenwn
-    public Contracts(Services serviceName,String clientName,String clientNumber,Date activationDate,String paymentMethod,int minutesToCell,int minutestoBase,int sms){
+    float discount; //endexomenh ekptwsh gia kathe symvolaio ksexwrista
+    public Contracts(Services serviceName,String clientName,String clientNumber,Date activationDate,String paymentMethod,int minutesToCell,int minutestoBase,int sms,float discount){
         this.id=id;
         this.serviceName=serviceName;
         this.clientName=clientName;
@@ -20,9 +21,10 @@ class Contracts {
         this.minutesToCell=minutesToCell;
         this.minutestoBase=minutestoBase;
         this.sms=sms;
+        this.discount=discount;
         id+=1;
     }
-    public Contracts(Services serviceName,String clientName,String clientNumber,Date activationDate,String paymentMethod,int data){
+    public Contracts(Services serviceName,String clientName,String clientNumber,Date activationDate,String paymentMethod,int data,float discount){
         this.id=id;
         this.serviceName=serviceName;
         this.clientName=clientName;
@@ -30,6 +32,7 @@ class Contracts {
         this.activationDate=activationDate;
         this.paymentMethod=paymentMethod;
         this.data=data;
+        this.discount=discount;
         id+=1;
     }
 }
