@@ -1,6 +1,5 @@
 import java.util.Date;
-class Contracts {
-    private static int id=0; //kwdikos sumbolaioy
+class Contracts  {
     private Services serviceName; //yphresia
     private String clientName; //onoma pelath
     private String clientNumber; //arithmos thlefwnou pelath
@@ -12,7 +11,6 @@ class Contracts {
     private int data; //ogkos dedomenwn
     float discount; //endexomenh ekptwsh gia kathe symvolaio ksexwrista
     public Contracts(Services serviceName,String clientName,String clientNumber,Date activationDate,String paymentMethod,int minutesToCell,int minutestoBase,int sms,float discount){
-        this.id=id;
         this.serviceName=serviceName;
         this.clientName=clientName;
         this.clientNumber=clientNumber;
@@ -22,10 +20,8 @@ class Contracts {
         this.minutestoBase=minutestoBase;
         this.sms=sms;
         this.discount=discount;
-        id+=1;
     }
     public Contracts(Services serviceName,String clientName,String clientNumber,Date activationDate,String paymentMethod,int data,float discount){
-        this.id=id;
         this.serviceName=serviceName;
         this.clientName=clientName;
         this.clientNumber=clientNumber;
@@ -33,12 +29,12 @@ class Contracts {
         this.paymentMethod=paymentMethod;
         this.data=data;
         this.discount=discount;
-        id+=1;
     }
     Services getContractService(Contracts cont){
         return cont.serviceName;
     }
     public String toString(){
-        return "Name: "+this.clientName+" client number: "+this.clientNumber+" activation date "+this.activationDate+" payment method: "+this.paymentMethod;
+        if (this.serviceName.getClass().getName()=="DataServices") return "Name: "+this.clientName+" client number: "+this.clientNumber+" activation date "+this.activationDate+" payment method: "+this.paymentMethod+" data: "+this.data+" special discount: "+this.discount;
+        else return "Name: "+this.clientName+" client number: "+this.clientNumber+" activation date "+this.activationDate+" payment method: "+this.paymentMethod+" minutes to cellphones: "+this.minutesToCell+" minutes to base phones: "+this.minutestoBase+" special discount: "+this.discount;
     }
 }

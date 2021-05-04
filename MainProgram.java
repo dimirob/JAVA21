@@ -46,8 +46,8 @@ class MainProgram {
                     System.out.println("Print 1 for Data Service contracts");
                     System.out.println("Print 2 for Card Service contracts");
                     System.out.println("Print 3 for Non Card Service contracts");
-                    serv=sc.nextInt();
-                    printContbyType(serv,colls);
+                    serv=sc.nextInt(); //epilogh yphresias gia emfanish symbolaiwn 
+                    printContbyType(serv,colls); //func gia emfanish sygkekrimenwn symbolaiwn 
                     
             }
             printMenu();
@@ -118,17 +118,17 @@ class MainProgram {
         switch(serv){
             case 1:
                 for (int i=0;i<colls.getContractLength();i++){
-                    if (colls.getServiceType(colls.getFromContracts(i).getContractService(colls.getFromContracts(i)))=="DataServices") System.out.println(colls.getFromContracts(i));
+                    if (colls.getServiceType(colls.getFromContracts(i).getContractService(colls.getFromContracts(i)))=="DataServices") System.out.println(colls.getFromContracts(i)); //epilegoume mono dataservice contracts
                 }
                 break;
             case 2:
                 for (int i=0;i<colls.getContractLength();i++){
-                    if (colls.getServiceType(colls.getFromContracts(i).getContractService(colls.getFromContracts(i)))=="CardContract") System.out.println(colls.getFromContracts(i));
+                    if (colls.getServiceType(colls.getFromContracts(i).getContractService(colls.getFromContracts(i)))=="CardContract") System.out.println(colls.getFromContracts(i)); //epilegoume mono Card contracts
                 }
                 break;
             case 3:
                 for (int i=0;i<colls.getContractLength();i++){
-                    if (colls.getServiceType(colls.getFromContracts(i).getContractService(colls.getFromContracts(i)))=="nonCardContract") System.out.println(colls.getFromContracts(i));
+                    if (colls.getServiceType(colls.getFromContracts(i).getContractService(colls.getFromContracts(i)))=="nonCardContract") System.out.println(colls.getFromContracts(i)); //epilegoume mono nonCard contracts
                 }
                 break;
         }
