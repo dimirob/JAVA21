@@ -1,3 +1,4 @@
+import java.security.Provider.Service;
 import java.util.Date;
 import java.util.Scanner;
 class MainProgram {
@@ -37,9 +38,17 @@ class MainProgram {
                 case 2:
                     System.out.println("Choose Service");
                     printServ(colls);
-                    int serv=sc.nextInt(); //arithmos yphresias
+                    int serv=sc.nextInt(); //arithmos
                     if(colls.getServiceType(colls.getFromServices(serv))=="DataServices") createDataCont(colls.getFromServices(serv),colls); //an to symbolaio anaferetai se kinhto internet, kaloume katallhlo "kataskeyasth"
                     else createTalkCon(colls.getFromServices(serv),colls); //alliws kaloume to func "kataskeyasth" gia ta sumvolaia kinhths thlefwnias
+                    break;
+                case 3:
+                    System.out.println("Print 1 for Data Service contracts");
+                    System.out.println("Print 2 for Card Service contracts");
+                    System.out.println("Print 3 for Non Card Service contracts");
+                    serv=sc.nextInt();
+                    printContbyType(serv,colls);
+                    
             }
             printMenu();
             choice=sc.nextInt();
@@ -104,5 +113,24 @@ class MainProgram {
         System.out.println("Special discount (if there is no discount enter 0): "); //telos sylloghs katallhlwn dedomenwn
         float discount=sc.nextFloat();
         colls.addToCollection(new Contracts(serv, name, num, actDate, payMethod, minutesToCell,minutestoBase,sms, discount)); //prosthkh neou symvolaioy-antikeimenou sthn sullogh symvolaiwn
+    }
+    static void printContbyType(int serv,Collections colls){
+        switch(serv){
+            case 1:
+                for (int i=0;i<colls.getContractLength();i++){
+                    if (colls.getServiceType(colls.getFromContracts(i).getContractService(colls.getFromContracts(i)))=="DataServices") System.out.println(colls.getFromContracts(i));
+                }
+                break;
+            case 2:
+                for (int i=0;i<colls.getContractLength();i++){
+                    if (colls.getServiceType(colls.getFromContracts(i).getContractService(colls.getFromContracts(i)))=="CardContract") System.out.println(colls.getFromContracts(i));
+                }
+                break;
+            case 3:
+                for (int i=0;i<colls.getContractLength();i++){
+                    if (colls.getServiceType(colls.getFromContracts(i).getContractService(colls.getFromContracts(i)))=="nonCardContract") System.out.println(colls.getFromContracts(i));
+                }
+                break;
+        }
     }
 }

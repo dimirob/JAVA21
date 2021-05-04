@@ -27,4 +27,5 @@ class Collections {
     String getServiceType(Services serv){
         return serv.getClass().getName();
     }
+    
 }
