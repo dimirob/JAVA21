@@ -35,4 +35,10 @@ class Contracts {
         this.discount=discount;
         id+=1;
     }
+    Services getContractService(Contracts cont){
+        return cont.serviceName;
+    }
+    public String toString(){
+        return "Name: "+this.clientName+" client number: "+this.clientNumber+" activation date "+this.activationDate+" payment method: "+this.paymentMethod;
+    }
 }
