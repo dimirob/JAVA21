@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.Scanner;
 class Contracts  {
     private Services serviceName; //yphresia
     private String clientName; //onoma pelath
@@ -36,5 +37,21 @@ class Contracts  {
     public String toString(){
         if (this.serviceName.getClass().getName()=="DataServices") return "Name: "+this.clientName+" client number: "+this.clientNumber+" activation date "+this.activationDate+" payment method: "+this.paymentMethod+" data: "+this.data+" special discount: "+this.discount;
         else return "Name: "+this.clientName+" client number: "+this.clientNumber+" activation date "+this.activationDate+" payment method: "+this.paymentMethod+" minutes to cellphones: "+this.minutesToCell+" minutes to base phones: "+this.minutestoBase+" special discount: "+this.discount;
+    }
+    static void setStats(Contracts con){
+        Scanner sc=new Scanner(System.in);
+        if (con.serviceName.getClass().getName()=="DataServices"){
+            System.out.print("Enter data usage");
+            con.data=sc.nextInt();
+        }
+        else{
+            System.out.println("Enter minutes to cell");
+            con.minutesToCell=sc.nextInt();
+            System.out.println("Enter minutes to base phones");
+            con.minutestoBase=sc.nextInt();
+            System.out.println("Enter SMS");
+            con.sms=sc.nextInt();
+        }
+
     }
 }
