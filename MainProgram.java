@@ -31,7 +31,17 @@ class MainProgram {
         choice=sc.nextInt(); //epilogh xrhsth
         while (choice!=0){ //Eksodos apo to programma 
             switch(choice){
+                case 1:
+                    printServ(colls); //Func gia thn ektypwsh yphresiwn
+                    break; 
+                case 2:
+                    System.out.println("Choose Service");
+                    printServ(colls);
+                    int serv=sc.nextInt(); //arithmos yphresias
+                    if(colls.getServiceType(colls.getFromServices(serv))=="DataServices") createDataCont(colls.getFromServices(serv),colls); //an to symbolaio anaferetai se kinhto internet, kaloume katallhlo "kataskeyasth"
+                    else createTalkCon(colls.getFromServices(serv),colls); //alliws kaloume to func "kataskeyasth" gia ta sumvolaia kinhths thlefwnias
             }
+            printMenu();
             choice=sc.nextInt();
         }
 
@@ -45,5 +55,54 @@ class MainProgram {
         System.out.println("4: Enhmerwsh statistikwn xrhshs symbolaioy");
         System.out.println("5: Ypologismos synolikou mhniaiou kostous (Symbolaia thlefwnias kai internet) kai diathesimo mhniaio ypoloipo gia kartosymbolaia");
         System.out.println("6: Ypologismos ypoloipou dwrean SMS kai xronou omilias gia kartosumbolaia kai symbolaia kin. thlefwnias, kai ypoloipoy dwrean data gia kinhto Internet"); //Telos emfanishs menu
+    }
+    static void printServ(Collections colls){
+        for (int i=0;i<colls.getServicesLength();i++) System.out.println(colls.getFromServices(i)+"  service no: "+i); //Ektypwsh diathesimwn yphresiwn
+    }
+    static void createDataCont(Services serv,Collections colls){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Client name: "); //arxh sulloghs katallhlwn dedomenwn
+        String name=sc.next();
+        System.out.println("Client number: ");
+        String num=sc.next();
+        System.out.println("Activation Year: ");
+        int year=sc.nextInt();
+        System.out.println("Activation Month: ");
+        int month=sc.nextInt();
+        System.out.println("Activation day: ");
+        int day=sc.nextInt();
+        Date actDate=new Date(year, month, day);
+        System.out.println("Payment method: ");
+        String payMethod=sc.next();
+        System.out.println("Data usage: ");
+        int data=sc.nextInt();
+        System.out.println("Special discount (if there is no discount enter 0): ");
+        float discount=sc.nextFloat(); //telos sylloghs katallhlwn dedomenwn
+        colls.addToCollection(new Contracts(serv, name, num, actDate, payMethod, data, discount)); //prosthkh neou symvolaioy-antikeimenou sthn sullogh symvolaiwn
+    }
+    static void createTalkCon(Services serv,Collections colls){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Client name: "); //arxh sylloghs katallhlwn dedomenwn
+        String name=sc.next();
+        System.out.println("Client number: ");
+        String num=sc.next();
+        System.out.println("Activation Year: ");
+        int year=sc.nextInt();
+        System.out.println("Activation Month: ");
+        int month=sc.nextInt();
+        System.out.println("Activation day: ");
+        int day=sc.nextInt();
+        Date actDate=new Date(year, month, day);
+        System.out.println("Payment method: ");
+        String payMethod=sc.next();
+        System.out.println("Minutes to cell phones: ");
+        int minutesToCell=sc.nextInt();
+        System.out.println("Minutes to base phones: ");
+        int minutestoBase=sc.nextInt();
+        System.out.println("SMS: ");
+        int sms=sc.nextInt();
+        System.out.println("Special discount (if there is no discount enter 0): "); //telos sylloghs katallhlwn dedomenwn
+        float discount=sc.nextFloat();
+        colls.addToCollection(new Contracts(serv, name, num, actDate, payMethod, minutesToCell,minutestoBase,sms, discount)); //prosthkh neou symvolaioy-antikeimenou sthn sullogh symvolaiwn
     }
 }

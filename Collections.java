@@ -18,4 +18,13 @@ class Collections {
     Contracts getFromContracts(int i){
         return this.contractArray.get(i);
     }
+    int getServicesLength(){
+        return this.serviceArray.size();
+    }
+    int getContractLength(){
+        return this.contractArray.size();
+    }
+    String getServiceType(Services serv){
+        return serv.getClass().getName();
+    }
 }
