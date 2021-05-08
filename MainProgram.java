@@ -55,12 +55,17 @@ class MainProgram {
                     System.out.println(colls.getFromContracts(con)); //ektypwsh symbolaiou
                     Contracts.setStats(colls.getFromContracts(con)); //ananewsh statistikwn 
                     break;
-                    
-
+                case 5:
+                    printCon(colls);
+                    System.out.println("Choose contract id to calculate cost");
+                    con=sc.nextInt();
+                    System.out.println(colls.getFromContracts(con));
+                    System.out.println("Contract total cost: "+Contracts.getCost(colls,colls.getFromContracts(con),colls.getFromContracts(con).getContractService(colls.getFromContracts(con))));
             }
             printMenu();
             choice=sc.nextInt();
         }
+        sc.close();
 
 
     }
@@ -77,7 +82,7 @@ class MainProgram {
         for (int i=0;i<colls.getServicesLength();i++) System.out.println(colls.getFromServices(i)+"  service no: "+i); //Ektypwsh diathesimwn yphresiwn
     }
     static void printCon(Collections colls){
-        for (int i=0;i<colls.getContractLength();i++) System.out.println(colls.getFromContracts(i)+"  Contract id: "+colls.getId(colls.getFromContracts(i))); //Ektypwsh energwn symbolaiwn
+        for (int i=0;i<colls.getContractLength();i++) System.out.println(colls.getFromContracts(i)+"  Contract id: "+colls.getConId(colls.getFromContracts(i))); //Ektypwsh energwn symbolaiwn
     }
     static void createDataCont(Services serv,Collections colls){
         Scanner sc=new Scanner(System.in);
@@ -99,6 +104,7 @@ class MainProgram {
         System.out.println("Special discount (if there is no discount enter 0): ");
         float discount=sc.nextFloat(); //telos sylloghs katallhlwn dedomenwn
         colls.addToCollection(new Contracts(serv, name, num, actDate, payMethod, data, discount)); //prosthkh neou symvolaioy-antikeimenou sthn sullogh symvolaiwn
+        sc.close();
     }
     static void createTalkCon(Services serv,Collections colls){
         Scanner sc=new Scanner(System.in);
@@ -124,6 +130,7 @@ class MainProgram {
         System.out.println("Special discount (if there is no discount enter 0): "); //telos sylloghs katallhlwn dedomenwn
         float discount=sc.nextFloat();
         colls.addToCollection(new Contracts(serv, name, num, actDate, payMethod, minutesToCell,minutestoBase,sms, discount)); //prosthkh neou symvolaioy-antikeimenou sthn sullogh symvolaiwn
+        sc.close();
     }
     static void printContbyType(int serv,Collections colls){
         switch(serv){
@@ -142,7 +149,7 @@ class MainProgram {
                     if (colls.getServiceType(colls.getFromContracts(i).getContractService(colls.getFromContracts(i)))=="nonCardContract") System.out.println(colls.getFromContracts(i)); //epilegoume mono nonCard contracts
                 }
                 break;
-
+                
         }
     }
 }
