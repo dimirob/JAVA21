@@ -52,6 +52,44 @@ class Contracts  {
             System.out.println("Enter SMS");
             con.sms=sc.nextInt();
         }
-
+        sc.close();
+    }
+    static float getCost(Collections coll,Contracts con,Services serv){//function pou pairnei ws parametrous ta collections pou briskontai contracts kai services,to symvolaio,kai thn yphresia tou symvolaioy
+        switch(coll.getServiceType(serv)){
+            case "DataService"://periptwsh data sumbolaiou
+                int freedata=serv.getFreeData();
+                if (con.data<=freedata) return 0;
+                else{
+                    float servDiscount=serv.getServiceDiscount();
+                    float dataCost=serv.getDataCost();
+                    return (float)(freedata-con.data)*dataCost-(servDiscount+con.discount)*(freedata-con.data)*dataCost;
+                }
+            case "nonCardContract"://periptwsh symbolaiou kinhths thlefwnias
+                int freeMins=serv.getFreeMinutes();
+                int freeSMS=serv.getFreeSMS();
+                if(con.minutesToCell+con.minutestoBase<=freeMins & con.sms<=freeSMS) {return 0;}
+                else{
+                    float servDiscount=serv.getServiceDiscount();
+                    float minCost=serv.getMinutesCost();
+                    float smsCost=serv.getSMSCost();
+                    float sumMinCost=con.minutesToCell+con.minutestoBase<=freeMins?0:(con.minutesToCell+con.minutesToCell-freeMins)*minCost;
+                    float sumSMSCost=con.sms<=freeSMS?0:(con.sms-freeSMS)*smsCost;
+                    return sumMinCost+sumSMSCost-(sumMinCost+sumSMSCost)*(con.discount+servDiscount);
+                } 
+            case "CardService":
+                freeMins=serv.getFreeMinutes();
+                freeSMS=serv.getFreeSMS();
+                float budget=serv.getBudget();
+                float servDiscount=serv.getServiceDiscount();
+                float minCost=serv.getMinutesCost();
+                float smsCost=serv.getSMSCost();
+                float sumMinCost=con.minutesToCell+con.minutestoBase<=freeMins?0:(con.minutesToCell+con.minutesToCell-freeMins)*minCost;
+                float sumSMSCost=con.sms<=freeSMS?0:(con.sms-freeSMS)*smsCost;
+                float totalCost=sumMinCost+sumSMSCost-(sumMinCost+sumSMSCost)*(con.discount+servDiscount);
+                if(totalCost<=budget) return totalCost-budget;
+                else return 0; 
+            default:
+                return 0;
+        }   
     }
 }

@@ -27,8 +27,12 @@ class Collections {
     String getServiceType(Services serv){
         return serv.getClass().getName();
     }
-    int getId(Contracts con){
+    int getConId(Contracts con){
         return this.contractArray.indexOf(con);
     }
+    int getServId(Services serv){
+        return this.serviceArray.indexOf(serv);
+    }
+    
     
 }
