@@ -5,6 +5,7 @@ abstract class Services{ //afhrhmenh klash gia kathe yphresia
         this.serviceFee=fee;
         this.serviceName=name;
     }
+    float getServiceFee(){return this.serviceFee;}
     abstract float getServiceDiscount();
     abstract float getDataCost();
     abstract int getFreeData();
