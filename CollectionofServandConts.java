@@ -1,8 +1,8 @@
 import java.util.ArrayList;
-class Collections {
+class CollectionofServandConts {
     private ArrayList<Services> serviceArray; //ArrayList gia tis diathesimes yphresies 
     private ArrayList<Contracts> contractArray; //ArrayList gia ta energa sumvolaia
-    public Collections(){
+    public CollectionofServandConts(){
         this.serviceArray=new ArrayList<Services>();
         this.contractArray=new ArrayList<Contracts>();
     }   
@@ -33,6 +33,4 @@ class Collections {
     int getServId(Services serv){
         return this.serviceArray.indexOf(serv);
     }
-    
-    
 }

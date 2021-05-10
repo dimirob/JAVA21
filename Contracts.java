@@ -1,17 +1,16 @@
-import java.util.Date;
 import java.util.Scanner;
 class Contracts  {
     private Services serviceName; //yphresia
     private String clientName; //onoma pelath
     private String clientNumber; //arithmos thlefwnou pelath
-    private Date activationDate; //hmerominia energopoihshs
+    private String activationDate; //hmerominia energopoihshs
     private String paymentMethod; //tropos plhrwmhs
     private int minutestoBase; //lepta omilias pros stathera
     private int minutesToCell; //lepta omilias pros kinhta
     private int sms; //arithmos sms
     private int data; //ogkos dedomenwn
     float discount; //endexomenh ekptwsh gia kathe symvolaio ksexwrista
-    public Contracts(Services serviceName,String clientName,String clientNumber,Date activationDate,String paymentMethod,int minutesToCell,int minutestoBase,int sms,float discount){
+    public Contracts(Services serviceName,String clientName,String clientNumber,String activationDate,String paymentMethod,int minutesToCell,int minutestoBase,int sms,float discount){
         this.serviceName=serviceName;
         this.clientName=clientName;
         this.clientNumber=clientNumber;
@@ -22,7 +21,7 @@ class Contracts  {
         this.sms=sms;
         this.discount=discount;
     }
-    public Contracts(Services serviceName,String clientName,String clientNumber,Date activationDate,String paymentMethod,int data,float discount){
+    public Contracts(Services serviceName,String clientName,String clientNumber,String activationDate,String paymentMethod,int data,float discount){
         this.serviceName=serviceName;
         this.clientName=clientName;
         this.clientNumber=clientNumber;
@@ -52,31 +51,33 @@ class Contracts  {
             System.out.println("Enter SMS");
             con.sms=sc.nextInt();
         }
-        sc.close();
     }
-    static float getCost(Collections coll,Contracts con,Services serv){//function pou pairnei ws parametrous ta collections pou briskontai contracts kai services,to symvolaio,kai thn yphresia tou symvolaioy
+    static float getCost(CollectionofServandConts coll,Contracts con,Services serv){//function pou pairnei ws parametrous ta collections pou briskontai contracts kai services,to symvolaio,kai thn yphresia tou symvolaioy
         switch(coll.getServiceType(serv)){
-            case "DataService"://periptwsh data sumbolaiou
+            case "DataServices"://periptwsh data sumbolaiou
+                float fee=serv.getServiceFee();
                 int freedata=serv.getFreeData();
-                if (con.data<=freedata) return 0;
+                if (con.data<=freedata) return fee;
                 else{
                     float servDiscount=serv.getServiceDiscount();
                     float dataCost=serv.getDataCost();
-                    return (float)(freedata-con.data)*dataCost-(servDiscount+con.discount)*(freedata-con.data)*dataCost;
+                    return (float)fee+(con.data-freedata)*dataCost-(servDiscount+con.discount)*((con.data-freedata)*dataCost+fee);
                 }
             case "nonCardContract"://periptwsh symbolaiou kinhths thlefwnias
+                fee=serv.getServiceFee();
                 int freeMins=serv.getFreeMinutes();
                 int freeSMS=serv.getFreeSMS();
-                if(con.minutesToCell+con.minutestoBase<=freeMins & con.sms<=freeSMS) {return 0;}
+                if(con.minutesToCell+con.minutestoBase<=freeMins & con.sms<=freeSMS) return fee;
                 else{
                     float servDiscount=serv.getServiceDiscount();
                     float minCost=serv.getMinutesCost();
                     float smsCost=serv.getSMSCost();
                     float sumMinCost=con.minutesToCell+con.minutestoBase<=freeMins?0:(con.minutesToCell+con.minutesToCell-freeMins)*minCost;
                     float sumSMSCost=con.sms<=freeSMS?0:(con.sms-freeSMS)*smsCost;
-                    return sumMinCost+sumSMSCost-(sumMinCost+sumSMSCost)*(con.discount+servDiscount);
+                    return fee+sumMinCost+sumSMSCost-(fee+sumMinCost+sumSMSCost)*(con.discount+servDiscount);
                 } 
-            case "CardService":
+            case "CardContract":
+                fee=serv.getServiceFee();
                 freeMins=serv.getFreeMinutes();
                 freeSMS=serv.getFreeSMS();
                 float budget=serv.getBudget();
@@ -85,9 +86,9 @@ class Contracts  {
                 float smsCost=serv.getSMSCost();
                 float sumMinCost=con.minutesToCell+con.minutestoBase<=freeMins?0:(con.minutesToCell+con.minutesToCell-freeMins)*minCost;
                 float sumSMSCost=con.sms<=freeSMS?0:(con.sms-freeSMS)*smsCost;
-                float totalCost=sumMinCost+sumSMSCost-(sumMinCost+sumSMSCost)*(con.discount+servDiscount);
-                if(totalCost<=budget) return totalCost-budget;
-                else return 0; 
+                float totalCost=fee+sumMinCost+sumSMSCost-(fee+sumMinCost+sumSMSCost)*(con.discount+servDiscount);
+                if(totalCost<=budget) return budget-totalCost;
+                else return budget; 
             default:
                 return 0;
         }   
